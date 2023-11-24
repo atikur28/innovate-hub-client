@@ -11,7 +11,7 @@ const Features = () => {
         onExit={() => setScrollTrigger(false)}
       >
         <div className="border-5 border-red-700 relative w-full">
-          <div className=" h-[40vh] bg-[url('https://i.ibb.co/LNx0JCF/brooke-cagle-g1-Kr4-Ozfoac-unsplash.jpg')] bg-cover bg-center opacity-40"></div>
+          <div className="h-[80vh] md:h-[40vh] bg-[url('https://i.ibb.co/LNx0JCF/brooke-cagle-g1-Kr4-Ozfoac-unsplash.jpg')] bg-cover bg-center opacity-40"></div>
           <div className="absolute top-4 space-y-3 md:space-y-0 md:top-[45%] w-full md:flex md:justify-around text-center md:items-center md:gap-5">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-black">

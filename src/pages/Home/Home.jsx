@@ -3,6 +3,7 @@ import image from "../../assets/images/home/home-banner-img1.jpg";
 import image2 from "../../assets/images/home/home-banner-img2.jpg";
 import image3 from "../../assets/images/home/home-banner-img-3.jpg";
 import Features from "./Features/Features";
+import Spotlight from "./Spotlight/Spotlight";
 
 const Home = () => {
   const handleSearch = (event) => {
@@ -123,6 +124,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Spotlight></Spotlight>
       <Features></Features>
     </div>
   );
