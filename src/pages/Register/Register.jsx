@@ -6,7 +6,7 @@ import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, loginInWithGoogle } = useContext(AuthContext);
   const [registerError, setRegisterError] = useState("");
 
   const navigate = useNavigate();
@@ -57,9 +57,20 @@ const Register = () => {
           navigate("/");
       })
       .catch(error => {
-        setRegisterError(error);
+        setRegisterError(error.message);
       })
   };
+
+  const handleRegisterWithGoogle = () => {
+    loginInWithGoogle()
+     .then(result => {
+      console.log(result.user);
+      Swal.fire("Good job!", "You have successfully logged in..", "success");
+     })
+     .catch(error => {
+      setRegisterError(error.message);
+     })
+  }
 
   return (
     <div>
@@ -131,7 +142,7 @@ const Register = () => {
         </p>
         <div className="w-max border mx-auto bg-white rounded-full mt-9 hover:bg-slate-100">
           <Link>
-            <button className="flex items-center justify-center gap-3 font-semibold py-2 w-[300px]">
+            <button onClick={handleRegisterWithGoogle} className="flex items-center justify-center gap-3 font-semibold py-2 w-[300px]">
               <img
                 className="w-5"
                 src="https://i.ibb.co/Pj0MgcP/google.png"

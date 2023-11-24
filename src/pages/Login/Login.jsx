@@ -1,16 +1,24 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../SharedPages/Navbar/Navbar";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const { login } = useContext(AuthContext);
+  const { login, loginInWithGoogle } = useContext(AuthContext);
+  const [loginError, setLoginError] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
+
+    setLoginError('');
 
     login(email, password)
       .then(result => {
@@ -20,8 +28,25 @@ const Login = () => {
             text: "You have logged in successfully!",
             icon: "success"
           });
+        navigate(from, {replace: true});
+      })
+      .catch(error => {
+        setLoginError(error.message);
       })
   };
+
+  const handleGoogleLogin = () => {
+    loginInWithGoogle()
+      .then((result) => {
+        console.log(result.user);
+        Swal.fire("Good job!", "You have successfully logged in..", "success");
+        navigate(from, {replace: true});
+      })
+      .catch((error) => {
+        setLoginError(error.message);
+      });
+  };
+
   return (
     <div>
       <Navbar></Navbar>
@@ -56,6 +81,11 @@ const Login = () => {
             </button>
           </div>
         </form>
+        {loginError && (
+          <p className="text-red-600 font-semibold text-center">
+            {loginError}
+          </p>
+        )}
         <p className="w-2/3 mx-auto font-medium mt-3 text-gray-700 dark:text-gray-400">
           Don’t have an account yet?{" "}
           <Link
@@ -67,7 +97,7 @@ const Login = () => {
         </p>
         <div className="w-max border mx-auto bg-white rounded-full mt-9 hover:bg-slate-100">
           <Link>
-            <button className="flex items-center justify-center gap-3 font-semibold py-2 w-[300px]">
+            <button onClick={handleGoogleLogin} className="flex items-center justify-center gap-3 font-semibold py-2 w-[300px]">
               <img
                 className="w-5"
                 src="https://i.ibb.co/Pj0MgcP/google.png"
