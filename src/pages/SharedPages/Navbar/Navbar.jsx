@@ -1,9 +1,13 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
+import useAdmin from "../../../hooks/useAdmin";
+import useCreator from "../../../hooks/useCreator";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [isAdmin] = useAdmin();
+  const [isCreator] = useCreator();
 
   const handleLogOut = () => {
     logOut()
@@ -85,18 +89,70 @@ const Navbar = () => {
                 <li></li>
               )}
               <li>
-                <NavLink
-                  to="/dashboard"
-                  className={({ isActive, isPending }) =>
-                    isPending
-                      ? "pending"
-                      : isActive
-                      ? "text-red-700 underline"
-                      : ""
-                  }
-                >
-                  Dashboard
-                </NavLink>
+                {user && isAdmin && (
+                  <>
+                    <NavLink
+                      to="/dashboard/manageUser"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "text-red-700 underline"
+                          : ""
+                      }
+                    >
+                      Dashboard
+                    </NavLink>
+                  </>
+                )}
+                {user && isCreator && (
+                  <>
+                    <NavLink
+                      to="/dashboard/addContest"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "text-red-700 underline"
+                          : ""
+                      }
+                    >
+                      Dashboard
+                    </NavLink>
+                  </>
+                )}
+                {user && !isAdmin && !isCreator && (
+                  <>
+                    <NavLink
+                      to="/dashboard/registeredContest"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "text-red-700 underline"
+                          : ""
+                      }
+                    >
+                      Dashboard
+                    </NavLink>
+                  </>
+                )}
+                {!user && (
+                  <>
+                    <NavLink
+                      to="/dashboard"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "text-red-700 underline"
+                          : ""
+                      }
+                    >
+                      Dashboard
+                    </NavLink>
+                  </>
+                )}
               </li>
               <li>
                 {user ? (

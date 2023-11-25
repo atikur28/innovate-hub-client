@@ -57,7 +57,7 @@ const Home = () => {
           <div className="absolute flex h-full w-full justify-center items-center text-center bg-gradient-to-r from-[rgba(0,0,0,0.6)] to-[rgba(0,0,0,0.6)]">
             <div className="">
               <h1 className="text-3xl md:text-5xl text-white font-bold">
-                InnovateHub Photo Contest: Capture. Create. Inspire!
+                InnovateHub Photo Contest
               </h1>
               <p className="lg:w-[500px] mx-auto text-white md:font-semibold mt-3 mb-5 lg:mt-5">
                 Join our vibrant community and let your lens tell a tale. The
@@ -92,7 +92,7 @@ const Home = () => {
           <div className="absolute flex h-full w-full justify-center items-center text-center bg-gradient-to-r from-[rgba(0,0,0,0.6)] to-[rgba(0,0,0,0.6)]">
             <div className="">
               <h1 className="text-3xl md:text-5xl text-white font-bold">
-                InnovateHub Web Design Challenge: Craft the Digital Future!
+                InnovateHub Web Design Challenge
               </h1>
               <p className="lg:w-[500px] mx-auto text-white md:font-semibold mt-3 mb-5 lg:mt-5">
                 Elevate your coding game at InnovateHub. Join fellow enthusiasts

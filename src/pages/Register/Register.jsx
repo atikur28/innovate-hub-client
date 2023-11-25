@@ -4,8 +4,10 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Register = () => {
+  const axiosPublic = useAxiosPublic();
   const { createUser, loginInWithGoogle } = useContext(AuthContext);
   const [registerError, setRegisterError] = useState("");
 
@@ -19,58 +21,80 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    setRegisterError('');
+    setRegisterError("");
 
     if (password.length < 6) {
-        setRegisterError("Password should be in 6 character!");
-        return;
-      } else if (!/[A-Z]/.test(password)) {
-        setRegisterError(
-          "Your password should have at least one upper case character!"
-        );
-        return;
-      } else if (!/[!@#$%^&*()_+{}[\]:;<>,.?~\\-]/.test(password)) {
-        setRegisterError(
-          "Your password should have at least one special character!"
-        );
-        return;
-      }
-    
+      setRegisterError("Password should be in 6 character!");
+      return;
+    } else if (!/[A-Z]/.test(password)) {
+      setRegisterError(
+        "Your password should have at least one upper case character!"
+      );
+      return;
+    } else if (!/[!@#$%^&*()_+{}[\]:;<>,.?~\\-]/.test(password)) {
+      setRegisterError(
+        "Your password should have at least one special character!"
+      );
+      return;
+    }
+
     createUser(email, password)
-      .then(result => {
-        Swal.fire({
-            title: "Good job!",
-            text: "You have registered successfully!",
-            icon: "success"
-          });
+      .then((result) => {
+        const userInfo = {
+          name: name,
+          email: email,
+          role: 'user'
+        };
+        axiosPublic.post("/users", userInfo).then((res) => {
+          if (res.data.insertedId) {
+            Swal.fire({
+              title: "Good job!",
+              text: "You have registered successfully!",
+              icon: "success",
+            });
+            form.reset();
+            navigate("/");
+          }
+        });
         updateProfile(result.user, {
-            displayName: name,
-            photoURL: photo,
-          })
-          .then(result => {
+          displayName: name,
+          photoURL: photo,
+        })
+          .then((result) => {
             console.log(result.user);
           })
-          .catch(error => {
-            console.log(error);
-          })
-          form.reset();
-          navigate("/");
+          .catch((error) => {
+            setRegisterError(error.message);
+          });
       })
-      .catch(error => {
+      .catch((error) => {
         setRegisterError(error.message);
-      })
+      });
   };
 
   const handleRegisterWithGoogle = () => {
     loginInWithGoogle()
-     .then(result => {
-      console.log(result.user);
-      Swal.fire("Good job!", "You have successfully logged in..", "success");
-     })
-     .catch(error => {
-      setRegisterError(error.message);
-     })
-  }
+      .then((result) => {
+        console.log(result.user);
+        const userInfo = {
+          name: result?.user?.displayName,
+          email: result?.user?.email,
+        };
+        axiosPublic.post("/users", userInfo).then((res) => {
+          if (res.data.insertedId) {
+            Swal.fire(
+              "Good job!",
+              "You have successfully logged in..",
+              "success"
+            );
+            navigate("/");
+          }
+        });
+      })
+      .catch((error) => {
+        setRegisterError(error.message);
+      });
+  };
 
   return (
     <div>
@@ -142,7 +166,10 @@ const Register = () => {
         </p>
         <div className="w-max border mx-auto bg-white rounded-full mt-9 hover:bg-slate-100">
           <Link>
-            <button onClick={handleRegisterWithGoogle} className="flex items-center justify-center gap-3 font-semibold py-2 w-[300px]">
+            <button
+              onClick={handleRegisterWithGoogle}
+              className="flex items-center justify-center gap-3 font-semibold py-2 w-[300px]"
+            >
               <img
                 className="w-5"
                 src="https://i.ibb.co/Pj0MgcP/google.png"
