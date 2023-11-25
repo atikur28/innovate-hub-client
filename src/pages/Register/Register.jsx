@@ -5,6 +5,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const axiosPublic = useAxiosPublic();
@@ -98,6 +99,9 @@ const Register = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Register</title>
+      </Helmet>
       <Navbar></Navbar>
       <div className="md:w-3/5 md:mx-auto my-10 py-10 bg-blue-50 rounded mx-2">
         <h2 className="text-2xl font-bold text-center">

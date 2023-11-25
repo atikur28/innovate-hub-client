@@ -9,6 +9,7 @@ import ManageUser from "../pages/Dashboard/ManageUser/ManageUser";
 import AdminRoute from "../routes/AdminRoute";
 import CreatorRoute from "../routes/CreatorRoute";
 import AddContest from "../pages/Dashboard/AddContest/AddContest";
+import ManageContest from "../pages/Dashboard/ManageContest/ManageContest";
 
 const createdRouter = createBrowserRouter([
     {
@@ -36,6 +37,10 @@ const createdRouter = createBrowserRouter([
             {
                 path: '/dashboard/manageUser',
                 element: <AdminRoute><ManageUser></ManageUser></AdminRoute>
+            },
+            {
+                path: '/dashboard/manageContest',
+                element: <AdminRoute><ManageContest></ManageContest></AdminRoute>
             },
             {
                 path: '/dashboard/addContest',

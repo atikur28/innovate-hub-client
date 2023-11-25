@@ -4,6 +4,7 @@ import image2 from "../../assets/images/home/home-banner-img2.jpg";
 import image3 from "../../assets/images/home/home-banner-img-3.jpg";
 import Features from "./Features/Features";
 import Spotlight from "./Spotlight/Spotlight";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   const handleSearch = (event) => {
@@ -14,6 +15,9 @@ const Home = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Home | InnovateHub</title>
+      </Helmet>
       <Navbar></Navbar>
       <div className="carousel h-screen w-full">
         <div id="slide1" className="carousel-item relative w-full">

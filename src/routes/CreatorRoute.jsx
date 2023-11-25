@@ -19,7 +19,7 @@ const CreatorRoute = ({children}) => {
         return children
     }
 
-    return <Navigate to="/login"></Navigate>
+    return <Navigate to="/"></Navigate>
 };
 
 CreatorRoute.propTypes = {

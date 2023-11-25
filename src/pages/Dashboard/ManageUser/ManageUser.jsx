@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const ManageUser = () => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -59,6 +60,9 @@ const ManageUser = () => {
 
   return (
     <div className="my-10 min-h-screen">
+      <Helmet>
+        <title>Manage User</title>
+      </Helmet>
       <h2 className="text-xl md:text-3xl font-bold text-center">
         <em>Manage Users</em>
       </h2>

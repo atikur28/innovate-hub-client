@@ -3,6 +3,7 @@ import Navbar from "../SharedPages/Navbar/Navbar";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { login, loginInWithGoogle } = useContext(AuthContext);
@@ -49,6 +50,9 @@ const Login = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <Navbar></Navbar>
       <div className="md:w-3/5 md:mx-auto my-10 py-10 bg-blue-50 rounded mx-2">
         <h2 className="text-2xl font-bold text-center">
