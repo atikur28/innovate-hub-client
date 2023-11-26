@@ -1,59 +1,50 @@
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useContext } from "react";
-import { AuthContext } from "../../../providers/AuthProvider";
-import { Helmet } from "react-helmet-async";
 
-const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-
-const AddContest = () => {
+const UpdateContest = () => {
   const { register, handleSubmit } = useForm();
-  const {user} = useContext(AuthContext);
-  const axiosPublic = useAxiosPublic();
+  const {
+    _id,
+    name,
+    image,
+    contestPrice,
+    prizeMoney,
+    tag,
+    deadline,
+    description,
+    instruction,
+  } = useLoaderData();
   const axiosSecure = useAxiosSecure();
-
   const onSubmit = async (data) => {
-    const imageFile = { image: data.image[0] };
-    const res = await axiosPublic.post(image_hosting_api, imageFile, {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    });
-    if (res.data.success) {
-      const contestInfo = {
-        name: data.contestName,
-        contestPrice: data.contestPrice,
-        prizeMoney: data.prizeMoney,
-        image: res.data.data.display_url,
-        email: user?.email,
-        tag: data.tag,
-        status: 'Pending',
-        participated: 0,
-        deadline: data.deadline,
-        description: data.description,
-        instruction: data.instruction,
-      };
-      const contestRes = await axiosSecure.post('/contests', contestInfo);
-      if(contestRes.data.insertedId){
-        Swal.fire({
-          title: "Good job!",
-          text: "You have added that contest",
-          icon: "success"
-        });
-      }
+    const updatedInfo = {
+      name: data.contestName,
+      contestPrice: data.contestPrice,
+      prizeMoney: data.prizeMoney,
+      image: data.image,
+      tag: data.tag,
+      deadline: data.deadline,
+      description: data.description,
+      instruction: data.instruction,
+    };
+    const contestRes = await axiosSecure.put(`/contests/${_id}`, updatedInfo);
+    if (contestRes.data.modifiedCount > 0) {
+      Swal.fire({
+        title: "Good job!",
+        text: "You have updated that contest",
+        icon: "success",
+      });
     }
   };
-
   return (
     <div className="my-10 min-h-screen">
       <Helmet>
-        <title>Add Contest</title>
+        <title>Update Contest</title>
       </Helmet>
       <h2 className="text-xl md:text-3xl font-bold text-center">
-        <em>Add Contest</em>
+        <em>Update Contest</em>
       </h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -64,7 +55,8 @@ const AddContest = () => {
           <input
             className="w-full py-2.5 px-3 rounded-md"
             type="text"
-            {...register("contestName", { required: true })}
+            {...register("contestName")}
+            defaultValue={name}
             placeholder="Contest Name"
           />
         </div>
@@ -74,7 +66,8 @@ const AddContest = () => {
             <input
               className="w-full py-2.5 px-3 rounded-md"
               type="text"
-              {...register("contestPrice", { required: true })}
+              {...register("contestPrice")}
+              defaultValue={contestPrice}
               placeholder="Contest Price"
             />
           </div>
@@ -83,23 +76,28 @@ const AddContest = () => {
             <input
               className="w-full py-2.5 px-3 rounded-md"
               type="text"
-              {...register("prizeMoney", { required: true })}
+              {...register("prizeMoney")}
+              defaultValue={prizeMoney}
               placeholder="Prize money"
             />
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">
-          <div className="flex items-center">
+          <div>
+            <h3 className="md:text-lg font-bold mb-2">Image</h3>
             <input
-              type="file"
-              {...register("image", { required: true })}
-              className="w-full max-w-xs"
+              className="w-full py-2.5 px-3 rounded-md"
+              type="text"
+              {...register("image")}
+              defaultValue={image}
+              placeholder="Image url"
             />
           </div>
           <div>
             <h3 className="md:text-lg font-bold mb-2">Tag</h3>
             <select
-              {...register("tag", { required: true })}
+              {...register("tag")}
+              defaultValue={tag}
               className="w-full py-2.5 px-3 rounded-md"
             >
               <option value="business">business</option>
@@ -114,7 +112,8 @@ const AddContest = () => {
           <input
             className="w-full py-2.5 px-3 rounded-md"
             type="date"
-            {...register("deadline", { required: true })}
+            {...register("deadline")}
+            defaultValue={deadline}
             placeholder="Contest Deadline"
           />
         </div>
@@ -123,7 +122,8 @@ const AddContest = () => {
           <input
             className="w-full py-2.5 px-3 rounded-md"
             type="text"
-            {...register("description", { required: true })}
+            {...register("description")}
+            defaultValue={description}
             placeholder="Contest Description"
           />
         </div>
@@ -133,13 +133,14 @@ const AddContest = () => {
           </h3>
           <textarea
             className="textarea w-full h-40"
-            {...register("instruction", { required: true })}
+            {...register("instruction")}
+            defaultValue={instruction}
             placeholder="Instruction"
           ></textarea>
         </div>
         <div className="w-max mx-auto">
           <button className="py-2 px-10 font-bold text-xl bg-blue-500 text-white rounded-md flex justify-center items-center gap-3">
-            Add Contest
+            Update Contest
           </button>
         </div>
       </form>
@@ -147,4 +148,4 @@ const AddContest = () => {
   );
 };
 
-export default AddContest;
+export default UpdateContest;

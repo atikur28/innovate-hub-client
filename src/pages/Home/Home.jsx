@@ -1,7 +1,7 @@
 import Navbar from "../SharedPages/Navbar/Navbar";
-import image from "../../assets/images/home/home-banner-img1.jpg";
-import image2 from "../../assets/images/home/home-banner-img2.jpg";
-import image3 from "../../assets/images/home/home-banner-img-3.jpg";
+import image from "../../assets/images/home/business-banner.jpg";
+import image2 from "../../assets/images/home/medical-banner.webp";
+import image3 from "../../assets/images/home/article-banner.jpg";
 import Features from "./Features/Features";
 import Spotlight from "./Spotlight/Spotlight";
 import { Helmet } from "react-helmet-async";
@@ -19,20 +19,18 @@ const Home = () => {
         <title>Home | InnovateHub</title>
       </Helmet>
       <Navbar></Navbar>
-      <div className="carousel h-screen w-full">
+      <div className="carousel h-screen md:h-[80vh] w-full">
         <div id="slide1" className="carousel-item relative w-full">
           <img src={image} className="w-full" />
           <div className="absolute flex h-full w-full justify-center items-center text-center bg-gradient-to-r from-[rgba(0,0,0,0.6)] to-[rgba(0,0,0,0.6)]">
             <div className="">
-              <h1 className="text-3xl md:text-5xl text-white font-bold">
+              <h1 className="text-xl md:text-3xl text-white font-bold">
                 InnovateHub: Where Creativity Thrives!
               </h1>
               <p className="lg:w-[610px] mx-auto text-white md:font-semibold mt-3 mb-5 lg:mt-5">
-                Embark on a coding adventure with InnovateHub. Our Code
-                Challenges are designed for enthusiasts of all levels. Join us
-                to solve exciting problems, enhance your coding prowess, and
-                connect with a vibrant tech community. Ignite your passion for
-                coding – InnovateHub, where challenges become opportunities!
+                Dream, Compete, Win! 🚀 Join Our Business Contest Now. Elevate
+                Your Ideas, Win Prizes, and Connect with Visionaries.
+                #BusinessContest 🏆✨
               </p>
               <form onSubmit={handleSearch} className="join">
                 <input
@@ -60,14 +58,14 @@ const Home = () => {
           <img src={image2} className="w-full" />
           <div className="absolute flex h-full w-full justify-center items-center text-center bg-gradient-to-r from-[rgba(0,0,0,0.6)] to-[rgba(0,0,0,0.6)]">
             <div className="">
-              <h1 className="text-3xl md:text-5xl text-white font-bold">
-                InnovateHub Photo Contest
+              <h1 className="text-xxl md:text-3xl text-white font-bold">
+                InnovateHub Medical Contest
               </h1>
               <p className="lg:w-[500px] mx-auto text-white md:font-semibold mt-3 mb-5 lg:mt-5">
-                Join our vibrant community and let your lens tell a tale. The
-                InnovateHub Photo Contest is your canvas to showcase the
-                extraordinary through captivating visuals. Unleash your
-                creativity – where every snapshot becomes a masterpiece!
+                Heal the Future! 🌡️ Join Our Medical Contest for Innovations in
+                Healthcare. Showcase Your Breakthroughs, Win Prestigious Prizes,
+                and Connect with Medical Pioneers. Your Ideas Can Save Lives!
+                #MedicalInnovation 🏥💡 #HealthcareChallenge
               </p>
               <form onSubmit={handleSearch} className="join">
                 <input
@@ -95,15 +93,15 @@ const Home = () => {
           <img src={image3} className="w-full" />
           <div className="absolute flex h-full w-full justify-center items-center text-center bg-gradient-to-r from-[rgba(0,0,0,0.6)] to-[rgba(0,0,0,0.6)]">
             <div className="">
-              <h1 className="text-3xl md:text-5xl text-white font-bold">
-                InnovateHub Web Design Challenge
+              <h1 className="text-xl md:text-3xl text-white font-bold">
+                InnovateHub Article Writing Contest
               </h1>
               <p className="lg:w-[500px] mx-auto text-white md:font-semibold mt-3 mb-5 lg:mt-5">
-                Elevate your coding game at InnovateHub. Join fellow enthusiasts
-                in our Code Challenge, where innovation meets lines of code.
-                Unleash your skills, tackle exciting problems, and be part of a
-                dynamic coding community. InnovateHub Code Challenge – where
-                brilliance takes center stage!
+                Pen Power Unleashed! 🖋️ Dive into our Article Writing Contest.
+                Craft compelling stories, share your unique perspectives, and
+                stand a chance to win recognition and rewards. Let your words
+                paint a masterpiece! 📝✨ #ArticleWritingContest
+                #WordsmithsUnite
               </p>
               <form onSubmit={handleSearch} className="join">
                 <input

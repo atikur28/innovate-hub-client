@@ -29,6 +29,16 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/allContest"
+          className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? "text-red-700 underline" : ""
+          }
+        >
+          All Contest
+        </NavLink>
+      </li>
     </>
   );
   return (
@@ -124,7 +134,7 @@ const Navbar = () => {
                 {user && !isAdmin && !isCreator && (
                   <>
                     <NavLink
-                      to="/dashboard/registeredContest"
+                      to="/dashboard/myProfile"
                       className={({ isActive, isPending }) =>
                         isPending
                           ? "pending"
