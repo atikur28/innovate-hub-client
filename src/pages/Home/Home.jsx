@@ -5,8 +5,16 @@ import image3 from "../../assets/images/home/article-banner.jpg";
 import Features from "./Features/Features";
 import Spotlight from "./Spotlight/Spotlight";
 import { Helmet } from "react-helmet-async";
+import PopularContest from "./PopularContest/PopularContest";
+import { useLoaderData } from "react-router-dom";
+import BestCreators from "./BestCreators/BestCreators";
 
 const Home = () => {
+  const totalContests = useLoaderData();
+  const sortedContestsData = [...totalContests].sort(
+    (a, b) => b.participated - a.participated
+  );
+
   const handleSearch = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -126,6 +134,17 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <div className="my-10">
+        <h2 className="text-3xl font-bold text-center mb-10">
+          <em>Popular Contests</em>
+        </h2>
+        <div className="w-max mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+          {sortedContestsData.slice(0, 6).map((sorted) => (
+            <PopularContest key={sorted._id} sorted={sorted}></PopularContest>
+          ))}
+        </div>
+      </div>
+      <BestCreators></BestCreators>
       <Spotlight></Spotlight>
       <Features></Features>
     </div>

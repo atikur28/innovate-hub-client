@@ -17,6 +17,7 @@ import CreatedContest from "../pages/Dashboard/CreatedContest/CreatedContest";
 import UpdateContest from "../pages/Dashboard/UpdateContest/UpdateContest";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Payment from "../pages/Payment/Payment";
+import ContestSubmitted from "../pages/Dashboard/ContestSubmitted/ContestSubmitted";
 
 const createdRouter = createBrowserRouter([
     {
@@ -26,7 +27,8 @@ const createdRouter = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home></Home>
+                element: <Home></Home>,
+                loader: () => fetch('http://localhost:5000/contests')
             },
             {
                 path: '/allContest',
@@ -72,6 +74,10 @@ const createdRouter = createBrowserRouter([
             {
                 path: '/dashboard/createdContest',
                 element: <CreatorRoute><CreatedContest></CreatedContest></CreatorRoute>
+            },
+            {
+                path: '/dashboard/contestSubmitted',
+                element: <CreatorRoute><ContestSubmitted></ContestSubmitted></CreatorRoute>
             },
             {
                 path: '/dashboard/myProfile',

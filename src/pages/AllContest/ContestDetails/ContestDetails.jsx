@@ -21,6 +21,10 @@ const ContestDetails = () => {
   const [isAdmin] = useAdmin();
   const [isCreator] = useCreator();
 
+  const targetDate = new Date(deadline).getTime();
+  const now = new Date().getTime();
+  const difference = targetDate - now;
+
   return (
     <div>
       <Helmet>
@@ -58,7 +62,7 @@ const ContestDetails = () => {
             <CountdownTimer deadline={deadline}></CountdownTimer>
           </div>
           <div className="my-3">
-            {isAdmin || isCreator ? (
+            {isAdmin || isCreator || difference < 1 ? (
               <button
                 disabled
                 className="btn w-full bg-green-700 hover:bg-green-800 text-white font-semibold"
