@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const Contest = ({item}) => {
     const {_id, image, name, participated, description} = item || {};
-    console.log(item);
     return (
         <div className="flex flex-col pb-5 border rounded p-2">
             <img className="w-[280px] lg:w-[380px] xl:w-[400px] h-[200px] lg:h-[250px] rounded" src={image} alt="" />

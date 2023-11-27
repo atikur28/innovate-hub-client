@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import Navbar from "../SharedPages/Navbar/Navbar";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Contest from "./Contest/Contest";
+import { Helmet } from "react-helmet-async";
 
 const AllContest = () => {
   const axiosPublic = useAxiosPublic();
@@ -15,6 +16,9 @@ const AllContest = () => {
   const confirmedContests = contests.filter(item => item.status === "Confirmed");
   return (
     <div>
+      <Helmet>
+        <title>All Contest</title>
+      </Helmet>
       <Navbar></Navbar>
       <div className="my-10">
         <h2 className="text-3xl font-bold text-center mb-10"><em>All Contests</em></h2>

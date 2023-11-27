@@ -15,11 +15,14 @@ import AllContest from "../pages/AllContest/AllContest";
 import ContestDetails from "../pages/AllContest/ContestDetails/ContestDetails";
 import CreatedContest from "../pages/Dashboard/CreatedContest/CreatedContest";
 import UpdateContest from "../pages/Dashboard/UpdateContest/UpdateContest";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import Payment from "../pages/Payment/Payment";
 
 const createdRouter = createBrowserRouter([
     {
         path: '/',
         element: <Root></Root>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/',
@@ -32,6 +35,11 @@ const createdRouter = createBrowserRouter([
             {
                 path: '/contestDetails/:id',
                 element: <PrivateRoute><ContestDetails></ContestDetails></PrivateRoute>,
+                loader: ({params}) => fetch(`http://localhost:5000/contests/${params.id}`)
+            },
+            {
+                path: '/payment/:id',
+                element: <PrivateRoute><Payment></Payment></PrivateRoute>,
                 loader: ({params}) => fetch(`http://localhost:5000/contests/${params.id}`)
             },
             {

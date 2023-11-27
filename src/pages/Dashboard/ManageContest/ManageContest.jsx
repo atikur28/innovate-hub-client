@@ -15,7 +15,9 @@ const ManageContest = () => {
   });
 
   const handleConfirmContest = (id) => {
-    const updatedStatus = { confirmation: "Confirmed" };
+    const oldCount = contests.find(data => data._id === id);
+    const newCount = oldCount.participated;
+    const updatedStatus = { confirmation: "Confirmed", newCount };
     axiosSecure.patch(`/contests/${id}`, updatedStatus).then((res) => {
       if (res.data.modifiedCount > 0) {
         Swal.fire({
