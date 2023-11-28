@@ -5,11 +5,15 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import { getAuth, updateProfile } from "firebase/auth";
 import app from "../../../firebase/firebase.config";
 import Swal from "sweetalert2";
+import { PieChart, Pie, Cell, Legend } from "recharts";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const auth = getAuth(app);
 
 const UserProfile = () => {
   const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
@@ -18,6 +22,53 @@ const UserProfile = () => {
       return res.data;
     },
   });
+
+  const { data: registers = [] } = useQuery({
+    queryKey: ["registers"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/registers");
+      return res.data;
+    },
+  });
+
+  const recentUser = registers.filter(data => data?.email === user?.email);
+  const pendingWon = recentUser.filter(item => item.winner === "Pending");
+  const winnerWon = recentUser.filter(item => item.winner === "Winner");
+  const pendingValue = pendingWon.length;
+  const winnerValue = winnerWon.length;
+
+  const data = [
+    { name: "Not Won", value: pendingValue },
+    { name: "Won", value: winnerValue },
+  ];
+
+  const COLORS = ["red", "#00C49F"];
+
+  const RADIAN = Math.PI / 180;
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent
+  }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+      >
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
 
   const handleUpdateName = (id) => {
     const name = document.getElementById("userName").value;
@@ -57,19 +108,43 @@ const UserProfile = () => {
   };
 
   return (
-    <div>
-      <div></div>
+    <div className="my-10 min-h-screen">
+      <Helmet>
+        <title>My Profile</title>
+      </Helmet>
       {users.map(
         (item) =>
           item?.email === user?.email && (
-            <div key={item?._id} className="my-10 mx-2 2xl:ml-10">
-              <h2 className="text-lg font-bold mb-5">
-                User name: {item?.name}
+            <div key={item?._id} className="my-10 mx-[5px] md:mx-2 2xl:ml-10">
+              <h2 className="text-lg font-bold">
+                Your name: {item?.name}
               </h2>
-              <div className="max-w-[1000px] flex flex-col md:flex-row gap-5">
+              <div>
+                <PieChart width={315} height={315}>
+                  <Pie
+                    data={data}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    label={renderCustomizedLabel}
+                    outerRadius={80}
+                    fill="#8884d8"
+                    dataKey="value"
+                  >
+                    {data.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={COLORS[index % COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                  <Legend></Legend>
+                </PieChart>
+              </div>
+              <div className="max-w-[1000px] flex flex-col md:flex-row gap-5 mt-5">
                 <div className="md:w-1/2">
                   <h3 className="md:text-xl font-bold mb-2">
-                    Update user name:
+                    Update your name:
                   </h3>
                   <input
                     className="py-2 px-2 border w-full rounded"
@@ -88,7 +163,7 @@ const UserProfile = () => {
                 </div>
                 <div className="md:w-1/2">
                   <h3 className="md:text-xl font-bold mb-2">
-                    Update user photo:
+                    Update your photo:
                   </h3>
                   <input
                     className="py-2 px-2 border w-full rounded"
