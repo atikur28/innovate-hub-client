@@ -9,6 +9,7 @@ import PopularContest from "./PopularContest/PopularContest";
 import { useLoaderData } from "react-router-dom";
 import BestCreators from "./BestCreators/BestCreators";
 import Footer from "../SharedPages/Footer/Footer";
+import ContestWinner from "./ContestWinner/ContestWinner";
 
 const Home = () => {
   const totalContests = useLoaderData();
@@ -144,6 +145,9 @@ const Home = () => {
             <PopularContest key={sorted._id} sorted={sorted}></PopularContest>
           ))}
         </div>
+      </div>
+      <div className="xl:w-3/4 mx-auto">
+        <ContestWinner></ContestWinner>
       </div>
       <BestCreators></BestCreators>
       <Spotlight></Spotlight>

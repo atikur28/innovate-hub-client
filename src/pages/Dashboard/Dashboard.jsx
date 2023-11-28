@@ -154,6 +154,48 @@ const Dashboard = () => {
               Home
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/allContest"
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "text-blue-700 underline"
+                  : ""
+              }
+            >
+              All Contest
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/about"
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "text-blue-700 underline"
+                  : ""
+              }
+            >
+              About Us
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/roles-responsibility"
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "text-blue-700 underline"
+                  : ""
+              }
+            >
+              Roles
+            </NavLink>
+          </li>
         </ul>
       </div>
       <div className="flex-1">

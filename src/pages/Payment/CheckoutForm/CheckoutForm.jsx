@@ -15,7 +15,7 @@ const CheckoutForm = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const { _id, name, deadline, contestPrice, participated, status, email} = useLoaderData();
+  const { _id, name, image, deadline, contestPrice, prizeMoney, participated, status, email} = useLoaderData();
   const totalPrice = parseFloat(contestPrice).toFixed(2);
 
   useEffect(() => {
@@ -77,6 +77,8 @@ const CheckoutForm = () => {
           name: user.displayName,
           email: user.email,
           creatorEmail: email,
+          contestImage: image,
+          prizeMoney: prizeMoney,
           contestName: name,
           transactionId: paymentIntent.id,
           price: totalPrice,

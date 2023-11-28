@@ -20,6 +20,7 @@ import Payment from "../pages/Payment/Payment";
 import ContestSubmitted from "../pages/Dashboard/ContestSubmitted/ContestSubmitted";
 import RegisteredContest from "../pages/Dashboard/RegisteredContest/RegisteredContest";
 import WinningContest from "../pages/Dashboard/WinningContest/WinningContest";
+import RolesResponsibility from "../pages/RolesResponsibility/RolesResponsibility";
 
 const createdRouter = createBrowserRouter([
     {
@@ -45,6 +46,10 @@ const createdRouter = createBrowserRouter([
                 path: '/payment/:id',
                 element: <PrivateRoute><Payment></Payment></PrivateRoute>,
                 loader: ({params}) => fetch(`http://localhost:5000/contests/${params.id}`)
+            },
+            {
+                path: '/roles-responsibility',
+                element: <RolesResponsibility></RolesResponsibility>
             },
             {
                 path: '/login',
