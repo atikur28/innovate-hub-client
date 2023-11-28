@@ -31,7 +31,7 @@ const createdRouter = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>,
-                loader: () => fetch('http://localhost:5000/contests')
+                loader: () => fetch('https://contest-hub-server-ivory.vercel.app/contests')
             },
             {
                 path: '/allContest',
@@ -40,12 +40,12 @@ const createdRouter = createBrowserRouter([
             {
                 path: '/contestDetails/:id',
                 element: <PrivateRoute><ContestDetails></ContestDetails></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/contests/${params.id}`)
+                loader: ({params}) => fetch(`https://contest-hub-server-ivory.vercel.app/contests/${params.id}`)
             },
             {
                 path: '/payment/:id',
                 element: <PrivateRoute><Payment></Payment></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/contests/${params.id}`)
+                loader: ({params}) => fetch(`https://contest-hub-server-ivory.vercel.app/contests/${params.id}`)
             },
             {
                 path: '/roles-responsibility',
@@ -101,7 +101,7 @@ const createdRouter = createBrowserRouter([
             {
                 path:'/dashboard/updateContest/:id',
                 element: <CreatorRoute><UpdateContest></UpdateContest></CreatorRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/contests/${params.id}`)
+                loader: ({params}) => fetch(`https://contest-hub-server-ivory.vercel.app/contests/${params.id}`)
             }
         ]
     }
