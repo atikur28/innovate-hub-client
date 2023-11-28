@@ -3,6 +3,7 @@ import Navbar from "../SharedPages/Navbar/Navbar";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Contest from "./Contest/Contest";
 import { Helmet } from "react-helmet-async";
+import Footer from "../SharedPages/Footer/Footer";
 
 const AllContest = () => {
   const axiosPublic = useAxiosPublic();
@@ -28,6 +29,7 @@ const AllContest = () => {
             }
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

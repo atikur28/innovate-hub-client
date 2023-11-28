@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../../hooks/useAdmin";
 import useCreator from "../../hooks/useCreator";
+import logo from "../../assets/images/logo.jpg";
 
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
@@ -8,7 +9,10 @@ const Dashboard = () => {
   return (
     <div className="flex flex-col md:flex-row">
       <div className="md:w-1/4 min-h-screen bg-blue-100 pt-10 px-5">
-        <h3 className="text-2xl font-bold mb-10">InnovateHub</h3>
+        <div className="mb-10 flex items-center gap-1">
+          <img className="w-[30px] h-[30px] rounded-full" src={logo} alt="" />
+          <h3 className="text-xl font-bold">InnovateHub</h3>
+        </div>
         <ul className="font-bold space-y-2 border-b-2 border-black pb-5">
           {isAdmin && (
             <>

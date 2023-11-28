@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import useAdmin from "../../../hooks/useAdmin";
 import useCreator from "../../../hooks/useCreator";
+import logo from "../../../assets/images/logo.jpg";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -68,9 +69,12 @@ const Navbar = () => {
             {navLinks}
           </ul>
         </div>
-        <Link to="/" className="md:text-2xl font-semibold md:font-bold">
-          InnovateHub
-        </Link>
+        <div className="flex items-center gap-2">
+          <img className="w-[40px] h-[40px] rounded-full" src={logo} alt="" />
+          <Link to="/" className="md:text-2xl font-semibold md:font-bold">
+            InnovateHub
+          </Link>
+        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="text-lg font-semibold flex gap-5">{navLinks}</ul>
@@ -150,12 +154,12 @@ const Navbar = () => {
                 {!user && (
                   <>
                     <NavLink
-                      to="/dashboard"
+                      to="/login"
                       className={({ isActive, isPending }) =>
                         isPending
                           ? "pending"
                           : isActive
-                          ? "text-red-700 underline"
+                          ? ""
                           : ""
                       }
                     >

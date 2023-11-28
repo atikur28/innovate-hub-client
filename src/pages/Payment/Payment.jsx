@@ -3,6 +3,7 @@ import Navbar from "../SharedPages/Navbar/Navbar";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm/CheckoutForm";
+import Footer from "../SharedPages/Footer/Footer";
 
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 
@@ -21,6 +22,7 @@ const Payment = () => {
             <CheckoutForm></CheckoutForm>
         </Elements>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

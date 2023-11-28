@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet-async";
 import PopularContest from "./PopularContest/PopularContest";
 import { useLoaderData } from "react-router-dom";
 import BestCreators from "./BestCreators/BestCreators";
+import Footer from "../SharedPages/Footer/Footer";
 
 const Home = () => {
   const totalContests = useLoaderData();
@@ -147,6 +148,7 @@ const Home = () => {
       <BestCreators></BestCreators>
       <Spotlight></Spotlight>
       <Features></Features>
+      <Footer></Footer>
     </div>
   );
 };

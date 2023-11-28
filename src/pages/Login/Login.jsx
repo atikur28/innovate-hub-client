@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import Footer from "../SharedPages/Footer/Footer";
 
 const Login = () => {
   const { login, loginInWithGoogle } = useContext(AuthContext);
@@ -112,6 +113,7 @@ const Login = () => {
           </Link>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

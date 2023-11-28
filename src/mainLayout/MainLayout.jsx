@@ -18,6 +18,7 @@ import UpdateContest from "../pages/Dashboard/UpdateContest/UpdateContest";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Payment from "../pages/Payment/Payment";
 import ContestSubmitted from "../pages/Dashboard/ContestSubmitted/ContestSubmitted";
+import RegisteredContest from "../pages/Dashboard/RegisteredContest/RegisteredContest";
 
 const createdRouter = createBrowserRouter([
     {
@@ -78,6 +79,10 @@ const createdRouter = createBrowserRouter([
             {
                 path: '/dashboard/contestSubmitted',
                 element: <CreatorRoute><ContestSubmitted></ContestSubmitted></CreatorRoute>
+            },
+            {
+                path: '/dashboard/registeredContest',
+                element: <RegisteredContest></RegisteredContest>
             },
             {
                 path: '/dashboard/myProfile',

@@ -74,7 +74,7 @@ const ContestSubmitted = () => {
                     </td>
                     <td className="text-[#737373] font-bold">{item?.name}</td>
                     <td>{item?.email}</td>
-                    <td>Done</td>
+                    <td>{item?.status}</td>
                     <td>
                       {item?.winner === "Winner" ? (
                         <p className="text-green-600 font-bold">Winner</p>

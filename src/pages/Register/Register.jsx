@@ -6,6 +6,7 @@ import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Helmet } from "react-helmet-async";
+import Footer from "../SharedPages/Footer/Footer";
 
 const Register = () => {
   const axiosPublic = useAxiosPublic();
@@ -184,6 +185,7 @@ const Register = () => {
           </Link>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

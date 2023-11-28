@@ -4,8 +4,23 @@ import CountdownTimer from "./CountdownTimer/CountdownTimer";
 import { Helmet } from "react-helmet-async";
 import useAdmin from "../../../hooks/useAdmin";
 import useCreator from "../../../hooks/useCreator";
+import Footer from "../../SharedPages/Footer/Footer";
+import { useQuery } from "@tanstack/react-query";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ContestDetails = () => {
+  const {user} = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
+  const { data: registers = [] } = useQuery({
+    queryKey: ["registers"],
+    queryFn: async () => {
+      const res = await axiosSecure.get('/registers');
+      return res.data;
+    },
+  });
+
   const {
     _id,
     image,
@@ -24,6 +39,10 @@ const ContestDetails = () => {
   const targetDate = new Date(deadline).getTime();
   const now = new Date().getTime();
   const difference = targetDate - now;
+
+
+  const userExist = registers.filter(item => item?.email === user?.email);
+  const isExist = userExist.find(data => data?.contestId === _id);
 
   return (
     <div>
@@ -62,7 +81,7 @@ const ContestDetails = () => {
             <CountdownTimer deadline={deadline}></CountdownTimer>
           </div>
           <div className="my-3">
-            {isAdmin || isCreator || difference < 1 ? (
+            {isAdmin || isCreator || difference < 1 || isExist ? (
               <button
                 disabled
                 className="btn w-full bg-green-700 hover:bg-green-800 text-white font-semibold"
@@ -79,6 +98,7 @@ const ContestDetails = () => {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };
