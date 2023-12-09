@@ -1,6 +1,6 @@
 # InnovateHub - Contest Platform
 
-**Live Link**: [HungryHarmony](https://contest-hub-6df80.web.app/)
+**Live Link**: [InnovateHub](https://contest-hub-6df80.web.app/)
 
 InnovateHub is a dynamic contest platform with roles for Admins, Contest Creators, and Participants. The website offers a user-friendly interface and unique features for various contests.
 
