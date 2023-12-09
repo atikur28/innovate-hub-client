@@ -1,8 +1,42 @@
-# React + Vite
+# InnovateHub - Contest Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Link**: [HungryHarmony](https://contest-hub-6df80.web.app/)
 
-Currently, two official plugins are available:
+InnovateHub is a dynamic contest platform with roles for Admins, Contest Creators, and Participants. The website offers a user-friendly interface and unique features for various contests.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+
+### Home Page
+
+- **Navbar:** 
+  - User profile options
+  - Contest tag search bar
+  - Popular contests section
+  - Contest winners and participation highlights
+
+### All Contest Page
+
+- Displays all contests with filtering by type/tags
+
+### Contest Details Page
+
+- Detailed information about specific contests
+- Countdown timer for deadlines
+- Registration button for participation
+
+### Role Management
+
+- Admin: Approve, update, and delete contests
+- Contest Creator: Add, update, and manage contests
+- User: Participate in contests, view profile
+
+### Dashboards
+
+- User Dashboard: Participated, winning contests, and profile
+- Creator Dashboard: Add contests, manage created contests
+- Admin Dashboard: Manage users and contests
+
+### Login and Registration
+
+- Secure login with Email/Password and Google Sign-in
+- Registration with user details and photo URL
